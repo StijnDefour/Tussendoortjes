@@ -83,7 +83,7 @@ export class AppComponent {
                       ["#","#","#","#","#"]))
   ];
 
-  changeSidebar(color: string, selectedIndex: int) {
+  changeSidebar(color: string, selectedIndex: number) {
     if (!this.sidebarToggle) {
       this.sidebarToggle=true;
     } else if (selectedIndex==this.sidebarSelected) {

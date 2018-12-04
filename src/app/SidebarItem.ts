@@ -1,3 +1,5 @@
+import { ThemaItem } from './ThemaItem';
+
 export class SidebarItem {
   constructor(
     public item_color: string,
