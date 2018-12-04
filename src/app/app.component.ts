@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { SidebarItem } from './SidebarItem';
 import { ThemaItem } from './ThemaItem';
 
-import { HttpClient } from '@angular/common/http';
+//import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -13,13 +13,13 @@ import { HttpClient } from '@angular/common/http';
 
 export class AppComponent {
 
-  constructor(private http: HttpClient) {
-  };
-
-  ngOnInit() {
-    let obs = this.http.get("http://localhost:52247/api/todo");
-    obs.subscribe((response) => console.log(response));
-  };
+  // constructor(private http: HttpClient) {
+  // };
+  //
+  // ngOnInit() {
+  //   let obs = this.http.get("http://localhost:52247/api/todo");
+  //   obs.subscribe((response) => console.log(response));
+  // };
 
   backgroundImg = "assets/Images/backgrounds/bg_1.jpeg";
   title = 'Tussendoortjes';
