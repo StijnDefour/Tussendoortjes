@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <nav class="navbar">
-  <a class="navbar-brand" href=""> <!-- https://zill-selector.katholiekonderwijs.vlaanderen -->
+  <a class="navbar-brand" routerLink="/"> <!-- https://zill-selector.katholiekonderwijs.vlaanderen -->
     <img src="assets/Images/logo-small.png" width="auto" height="50px" alt="">
   </a>
 
@@ -38,7 +38,7 @@
                 <li class="veld">{{ sidebarItems[sidebarSelected].item_themas.item_titel }}</li>
 
                 <li class="sweep" *ngFor="let item of sidebarItems[sidebarSelected].item_themas.item_themas; index as i">
-                  <a href="{{ sidebarItems[sidebarSelected].item_themas.item_urls[i] }}">{{ item }}</a>
+                  <a routerLink="list/{{sidebarItems[sidebarSelected].item_themas.item_urls[i]}}">{{ item }}</a>
                 </li>
 
 
@@ -71,8 +71,11 @@
       <div class="page-content-inner-veld">
         <div class="row veld-home-title">
           <div class="col-lg-12">
-            <h1>{{ sidebarItems[sidebarSelected].item_themas.item_titel }}</h1>
-            <p [style.color]="sidebarItems[sidebarSelected].item_color">{{ sidebarItems[sidebarSelected].item_beschrijving }}</p>
+
+            <router-outlet></router-outlet>
+            <!-- <h1>{{ sidebarItems[sidebarSelected].item_themas.item_titel }}</h1>
+            <p [style.color]="sidebarItems[sidebarSelected].item_color">{{ sidebarItems[sidebarSelected].item_beschrijving }}</p> -->
+
           </div>
         </div>
       </div>
