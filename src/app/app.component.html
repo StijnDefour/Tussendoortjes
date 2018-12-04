@@ -1,20 +1,88 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<nav class="navbar">
+  <a class="navbar-brand" href=""> <!-- https://zill-selector.katholiekonderwijs.vlaanderen -->
+    <img src="assets/Images/logo-small.png" width="auto" height="50px" alt="">
+  </a>
 
+  <span class="bars" (click)="toggleSidebar()">
+    <i class="fas fa-bars"></i>
+  </span>
+
+  <span class="user" (click)="toggleUserSidebar()">
+    <i class="fas fa-user" style="color:rgb(100,100,100)"></i>
+  </span>
+</nav>
+
+<!-- [style.background]="backgroundImg" -->
+<div id="wrapper" [ngStyle]="{'background-image':'url('+backgroundImg+')'}" >
+  <!-- Sidebar Left -->
+  <aside id="sidebar" [className]="sidebarToggle ? 'page-sidebar' : 'page-sidebar collapse-sidebar'">
+    <div class="sidebar-inner" [style.backgroundColor]="sidebarColor">
+      <div style="position: relative; overflow: hidden; width: 279px; height: 100%;">
+        <div class="sidebar-scrollarea" width="279px" height="100%" size="3px" opacity="0.4" always-visible="false" style="overflow: hidden; width: 279px; height: 100%;">
+            <div style="float:left;width:100%;height:442px!important">
+              <!-- Icons -->
+              <ul id="ul-veld">
+
+                <!-- sidebarItems -->
+                <li *ngFor="let item of sidebarItems; index as i">
+                  <a (click)="changeSidebar(item.item_color, i)" [style.background-color]="item.item_color" [style.border-color]="i==sidebarSelected ? item.item_color : 'rgb(255,255,255)'">
+                    <!-- <img src="{{ item.item_img }}" height="18" width="18"> -->
+                    <i [className]="item.item_img"></i>
+                  </a>
+                </li>
+
+              </ul>
+              <!-- Details -->
+              <ul id="ul-thema">
+                <li class="veld">{{ sidebarItems[sidebarSelected].item_themas.item_titel }}</li>
+
+                <li class="sweep" *ngFor="let item of sidebarItems[sidebarSelected].item_themas.item_themas; index as i">
+                  <a href="{{ sidebarItems[sidebarSelected].item_themas.item_urls[i] }}">{{ item }}</a>
+                </li>
+
+
+              </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+   <!-- Sidebar Right -->
+  <aside id="right-sidebar" [className]="sidebarUserToggle ? 'right-sidebar' : 'right-sidebar hide-sidebar'">
+    <div class="input-group" style="width:100%!important;z-index:1">
+      <h3>Log-in</h3>
+      <input type="text" class="form-control searchInput" placeholder="username">
+      <input type="password" class="form-control searchInput" placeholder="password">
+    </div>
+    <div class="button-wrapper">
+      <div class="btn btn-selector">
+        Log in
+      </div>
+      <div class="btn btn-selector">
+        Registreer
+      </div>
+    </div>
+  </aside>
+
+  <div [className]="sidebarToggle ? 'page-content sidebar-page' : 'page-content collapsed-sidebar'">
+    <div class="page-content-wrapper">
+      <div class="page-content-inner-veld">
+        <div class="row veld-home-title">
+          <div class="col-lg-12">
+            <h1>{{ sidebarItems[sidebarSelected].item_themas.item_titel }}</h1>
+            <p [style.color]="sidebarItems[sidebarSelected].item_color">{{ sidebarItems[sidebarSelected].item_beschrijving }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div [className]="sidebarToggle ? 'content' : 'content full-content'">
+    <div [className]="sidebarToggle ? 'footer' : 'footer full-content'">
+      © 2018 Stijn Defour
+    </div>
+  </div>
+
+</div>
