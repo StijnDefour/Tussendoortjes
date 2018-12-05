@@ -320,7 +320,8 @@ a {
 .page-content.sidebar-page {
     margin-left: 280px;
 }
-.page-content-wrapper {
+/* list-component test */
+/* .page-content-wrapper {
     float: left;
     width: 100%;
     height: auto;
@@ -358,7 +359,7 @@ a {
   .veld-home-title p {
       font-size: 1rem;
   }
-}
+} */
 
 .button-wrapper {
     text-align: center;
