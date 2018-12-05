@@ -6,24 +6,34 @@ import { RouterModule } from '@angular/router'
 import { AppComponent } from './app.component';
 import { ListTussendoortjesComponent } from './list-tussendoortjes/list-tussendoortjes.component';
 import { HomeComponent } from './home/home.component';
+import { DetailTussendoortjeComponent } from './detail-tussendoortje/detail-tussendoortje.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListTussendoortjesComponent,
-    HomeComponent
+    HomeComponent,
+    DetailTussendoortjeComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot([
       {
-        path: 'list/:id', // localhost:4200/list
+        path: 'list/:vaardigheid/:doel', // localhost:4200/list
+        component: DetailTussendoortjeComponent
+      },
+      {
+        path: 'list/:vaardigheid', // localhost:4200/list
         component: ListTussendoortjesComponent
       },
       {
         path: '',
         component: HomeComponent
+      },
+      {
+        path: '**',
+        redirectTo: ''
       }
     ]),
   ],

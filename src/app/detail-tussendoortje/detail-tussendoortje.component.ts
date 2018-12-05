@@ -2,20 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-list-tussendoortjes',
-  templateUrl: './list-tussendoortjes.component.html',
-  styleUrls: ['./list-tussendoortjes.component.css'],
+  selector: 'app-detail-tussendoortje',
+  templateUrl: './detail-tussendoortje.component.html',
+  styleUrls: ['./detail-tussendoortje.component.css']
 })
 
-export class ListTussendoortjesComponent implements OnInit {
+export class DetailTussendoortjeComponent implements OnInit {
   vaardigheid: string;
+  doel: string;
   private sub: any;
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-       this.vaardigheid = params['vaardigheid'];
+      this.vaardigheid = params['vaardigheid'];
+      this.doel = params['doel'];
     });
   }
 

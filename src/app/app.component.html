@@ -13,8 +13,8 @@
   </span>
 </nav>
 
-<!-- [style.background]="backgroundImg" -->
-<div id="wrapper" [ngStyle]="{'background-image':'url('+backgroundImg+')'}" >
+<!-- [ngStyle]="{'background-image':'url('+backgroundImg+')'}"  -->
+<div id="wrapper" >
   <!-- Sidebar Left -->
   <aside id="sidebar" [className]="sidebarToggle ? 'page-sidebar' : 'page-sidebar collapse-sidebar'">
     <div class="sidebar-inner" [style.backgroundColor]="sidebarColor">
@@ -38,7 +38,7 @@
                 <li class="veld">{{ sidebarItems[sidebarSelected].item_themas.item_titel }}</li>
 
                 <li class="sweep" *ngFor="let item of sidebarItems[sidebarSelected].item_themas.item_themas; index as i">
-                  <a routerLink="list/{{sidebarItems[sidebarSelected].item_themas.item_urls[i]}}">{{ item }}</a>
+                  <a [routerLink]="['/list', item.split(' ').join('-') | lowercase]">{{ item }}</a>
                 </li>
 
 
@@ -69,7 +69,7 @@
   <div [className]="sidebarToggle ? 'page-content sidebar-page' : 'page-content collapsed-sidebar'">
 
         <router-outlet></router-outlet>
-        
+
   </div>
 
   <div [className]="sidebarToggle ? 'content' : 'content full-content'">

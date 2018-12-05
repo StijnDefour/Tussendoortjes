@@ -26,7 +26,7 @@ export class AppComponent {
   sidebarColor = "rgb(255, 255, 255)";
   sidebarSelected = 0;
   sidebarToggle = false; //"page-sidebar collapse-sidebar"
-  sidebarUserToggle = true; //"hide-sidebar"
+  sidebarUserToggle = false; //"hide-sidebar"
   sidebarItems = [
     new SidebarItem("rgb(233, 37, 45)", "far fa-heart", "assets/Images/backgrounds/bg_1.jpeg",
         "Ik kan op een warme en communicatieve wijze in relatie treden met mezelf en met anderen.",

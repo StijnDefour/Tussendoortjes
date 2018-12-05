@@ -4,10 +4,10 @@
       <div class="col-lg-12">
 
 
-        <h1 class="capitalize">{{ vaardigheid.split('-').join(' ') }}</h1>
+        <h1>Detail</h1>
         <p [style.color]="'rgb(255,0,0)'">
           Beschrijving <br>
-          <a [routerLink]="['/list', vaardigheid, 'test']">{{ vaardigheid }}</a>
+          {{ vaardigheid }} : {{ doel }}
         </p>
 
       </div>
