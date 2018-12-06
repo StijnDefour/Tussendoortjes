@@ -25,7 +25,6 @@ export class AppComponent {
   sidebarSelected = 0;
   sidebarToggle = false; //"page-sidebar collapse-sidebar"
   sidebarUserToggle = false; //"hide-sidebar"
-
   sidebarItems = new SidebarItems().items;
 
   changeSidebar(color: string, selectedIndex: number) {
@@ -59,9 +58,19 @@ export class AppComponent {
     this.backgroundImg = img_url;
   }
 
+  testUser = "";
   login() {
     var email = (<HTMLInputElement>document.getElementById("email")).value;
-    let obs = this.http.get("http://localhost:61463/api/user/getAll/"+email);
-    obs.subscribe((response) => console.log(response));
+    var password = (<HTMLInputElement>document.getElementById("password")).value;
+    let obs = this.http.get("http://localhost:61463/api/user/getUserByLogin/"+email+"/"+password);
+    obs.subscribe((response) => {
+        if (response != null) {
+          this.testUser = response;
+          console.log(response)
+        } else {
+          this.testUser = "null";
+        }
+      }
+    );
   }
 }

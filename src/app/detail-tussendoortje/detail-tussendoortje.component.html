@@ -12,7 +12,12 @@
 
       </div>
     </div> -->
-      <editor id="editor" apiKey="i0nk28b7gqfpmqkr1u1scopm53p6indjaw6dbc0hk5ycehym" [init]="{menubar: false, items: 'undo redo | cut copy paste pastetext | selectall', resize: false, height : '480',raw:true}"></editor>
+      <editor id="editor" apiKey="i0nk28b7gqfpmqkr1u1scopm53p6indjaw6dbc0hk5ycehym" [init]="{items: 'undo redo | cut copy paste pastetext | selectall',
+                                                                                            menubar: false,
+                                                                                            resize: false, height : '480',
+                                                                                            raw:true,
+                                                                                            branding: false,
+                                                                                            elementpath: false}"></editor>
       <button type="button" (click)="getTinyMceContent()">Click Me!</button>
 
   </div>
