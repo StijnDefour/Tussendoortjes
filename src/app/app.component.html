@@ -53,11 +53,11 @@
   <aside id="right-sidebar" [className]="sidebarUserToggle ? 'right-sidebar' : 'right-sidebar hide-sidebar'">
     <div class="input-group" style="width:100%!important;z-index:1">
       <h3>Log-in</h3>
-      <input type="text" class="form-control searchInput" placeholder="username">
+      <input id="email" type="text" class="form-control searchInput" placeholder="username">
       <input type="password" class="form-control searchInput" placeholder="password">
     </div>
     <div class="button-wrapper">
-      <div class="btn btn-selector">
+      <div class="btn btn-selector" (click)="login()">
         Log in
       </div>
       <div class="btn btn-selector">

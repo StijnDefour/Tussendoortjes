@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { EditorModule } from '@tinymce/tinymce-angular';
+
 @Component({
   selector: 'app-detail-tussendoortje',
   templateUrl: './detail-tussendoortje.component.html',

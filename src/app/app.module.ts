@@ -23,11 +23,11 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     EditorModule,
     RouterModule.forRoot([
       {
-        path: 'list/:vaardigheid/:doel', // localhost:4200/list
+        path: 'list/:vaardigheid/:doel',
         component: DetailTussendoortjeComponent
       },
       {
-        path: 'list/:vaardigheid', // localhost:4200/list
+        path: 'list/:vaardigheid',
         component: ListTussendoortjesComponent
       },
       {
