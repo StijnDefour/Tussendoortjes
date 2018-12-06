@@ -8,6 +8,8 @@ import { ListTussendoortjesComponent } from './list-tussendoortjes/list-tussendo
 import { HomeComponent } from './home/home.component';
 import { DetailTussendoortjeComponent } from './detail-tussendoortje/detail-tussendoortje.component';
 
+import { EditorModule } from '@tinymce/tinymce-angular';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,6 +20,7 @@ import { DetailTussendoortjeComponent } from './detail-tussendoortje/detail-tuss
   imports: [
     BrowserModule,
     HttpClientModule,
+    EditorModule,
     RouterModule.forRoot([
       {
         path: 'list/:vaardigheid/:doel', // localhost:4200/list

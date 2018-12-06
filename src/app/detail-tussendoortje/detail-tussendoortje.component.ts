@@ -24,4 +24,8 @@ export class DetailTussendoortjeComponent implements OnInit {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
+
+  getTinyMceContent() {
+    console.log(tinymce.get("editor").getContent());
+  }
 }
