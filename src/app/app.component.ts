@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { SidebarItem } from './SidebarItem';
-import { ThemaItem } from './ThemaItem';
-import { SidebarItems } from './SidebarItems';
+import { NavigatieModel } from './Models/NavigatieModel';
 
 import { HttpClient } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
+
+import {CookieService} from 'angular2-cookie/core';
 
 @Component({
   selector: 'app-root',
@@ -13,64 +14,88 @@ import { HttpClient } from '@angular/common/http';
 })
 
 
-export class AppComponent {
-  constructor(private http: HttpClient) {
-  };
-
-  ngOnInit() {};
-
-  backgroundImg = "assets/Images/backgrounds/bg_1.jpeg";
+export class AppComponent implements OnInit  {
   title = 'Tussendoortjes';
-  sidebarColor = "rgb(255, 255, 255)";
+  sidebarColor = 'rgb(255, 255, 255)';
   sidebarSelected = 0;
-  sidebarToggle = false; //"page-sidebar collapse-sidebar"
-  sidebarUserToggle = false; //"hide-sidebar"
-  sidebarItems = new SidebarItems().items;
+  sidebarToggle = false;
+  sidebarUserToggle = false;
+  userLogedIn = null;
+  navigatieModel = new NavigatieModel();
+
+  constructor(private _http: HttpClient, private _cookieService: CookieService) {}
+
+  getVaardigheden(): any {
+    return this.navigatieModel.vaardigheden.filter(item => item.item_thema === this.navigatieModel.themas[this.sidebarSelected].id);
+  }
 
   changeSidebar(color: string, selectedIndex: number) {
     if (!this.sidebarToggle) {
-      this.sidebarToggle=true;
-    } else if (selectedIndex==this.sidebarSelected) {
-      this.sidebarToggle=false;
+      this.sidebarToggle = true;
+    } else if (selectedIndex === this.sidebarSelected) {
+      this.sidebarToggle = false;
     }
     this.sidebarSelected = selectedIndex;
     if (!this.sidebarToggle) {
-      this.sidebarColor = "rgb(255, 255, 255)";
-    } else {this.sidebarColor = color;}
-
-    this.setBackgroundImage(this.sidebarItems[this.sidebarSelected].item_bg);
-  };
+      this.sidebarColor = 'rgb(255, 255, 255)';
+    } else {this.sidebarColor = color; }
+  }
 
   toggleSidebar() {
     this.sidebarToggle = !this.sidebarToggle;
     if (!this.sidebarToggle) {
-      this.sidebarColor = "rgb(255, 255, 255)";
+      this.sidebarColor = 'rgb(255, 255, 255)';
     } else {
-      this.sidebarColor = this.sidebarItems[this.sidebarSelected].item_color;
+      this.sidebarColor = this.navigatieModel.themas[this.sidebarSelected].item_color;
     }
-  };
+  }
 
   toggleUserSidebar() {
     this.sidebarUserToggle = !this.sidebarUserToggle;
-  };
-
-  setBackgroundImage(img_url: string) {
-    this.backgroundImg = img_url;
   }
 
-  testUser = "";
-  login() {
-    var email = (<HTMLInputElement>document.getElementById("email")).value;
-    var password = (<HTMLInputElement>document.getElementById("password")).value;
-    let obs = this.http.get("http://localhost:61463/api/user/getUserByLogin/"+email+"/"+password);
+  logout() {
+    this._cookieService.remove('userInfo');
+    this.userLogedIn = null;
+  }
+
+  login(email: string, password: string) {
+    const url = 'http://localhost:61463/api/user/getUserByLogin';
+
+    const params = new HttpParams().set('email', email).set('password', password);
+
+    console.log(params);
+
+    const obs = this._http.get(url, {params});
     obs.subscribe((response) => {
         if (response != null) {
-          this.testUser = response;
-          console.log(response)
+          this._cookieService.putObject('userInfo', response, {});
+          this.userLogedIn = response;
         } else {
-          this.testUser = "null";
+          this.userLogedIn = null;
+          console.log('niks jom');
         }
       }
     );
   }
+
+  ngOnInit() {
+    // Load User info
+    const userCookie = this._cookieService.get('userInfo');
+    if (userCookie !== '' && this.IsJsonString(this._cookieService.get('userInfo'))) {
+      this.userLogedIn = JSON.parse(this._cookieService.get('userInfo'));
+    }
+
+    // reset doelen cookie
+    this._cookieService.remove('doelenGeselecteerd');
+  }
+
+  IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
 }

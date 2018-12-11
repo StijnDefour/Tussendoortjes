@@ -1,0 +1,55 @@
+<div class="page-content-wrapper">
+
+  <h1 class="vaardigheid-titel capitalize">
+    Geselecteerde leerdoelen
+    <!-- [style.color]="getThema().item_color" -->
+    <p>
+      test
+    </p>
+  </h1>
+  <span class="line" [style.backgroundColor]="'#000'"></span>
+
+<div class="page-content-inner-veld">
+  <div class="row veld-home-title">
+    <div class="col-lg-12">
+
+    <ul class="ul-doel">
+      <li>
+          <div class="row">
+            <div class="col-md-auto">
+              <span class="add-remove">
+                <i [className]="'far fa-check-square'"></i>
+              </span>
+            </div>
+            <div class="col-md-1">
+              <b><a class="titel" [style.color]="'#000'" [routerLink]="['']">Test</a></b>
+            </div>
+            <div class="col beschrijving">
+              beschrijving
+            </div>
+          </div>  
+        </li>
+      </ul>
+      
+      <!-- <ul class="ul-doel" *ngIf="vaardigheid != null">
+        <li *ngFor="let item of getDoelen(); index as i">
+            <div class="row">
+              <div class="col-md-auto">
+                <span class="add-remove" (click)="selecteerDoel(item.item_titel+(i+1))">
+                  <i [className]="doelIsGeselecteerd(item.item_titel+(i+1)) ? 'far fa-check-square' : 'far fa-square'"></i>
+                </span>
+              </div>
+              <div class="col-md-1">
+                <b><a class="titel" [style.color]="getThema().item_color" [routerLink]="['/detail', thema, vaardigheid, (i+1)]">{{ item.item_titel + (i+1) }}</a></b>
+              </div>
+              <div class="col beschrijving">
+                {{ item.item_beschrijving }}
+              </div>
+            </div>  
+        </li>
+      </ul> -->
+
+    </div>
+  </div>
+</div>
+</div>

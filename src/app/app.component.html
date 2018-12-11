@@ -1,19 +1,20 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <nav class="navbar">
-  <a class="navbar-brand" routerLink="/"> <!-- https://zill-selector.katholiekonderwijs.vlaanderen -->
+  <a class="navbar-brand" routerLink="/">
     <img src="assets/Images/logo-small.png" width="auto" height="50px" alt="">
   </a>
-
+  
+    
   <span class="bars" (click)="toggleSidebar()">
     <i class="fas fa-bars"></i>
   </span>
 
+   <!-- User toggle  -->
   <span class="user" (click)="toggleUserSidebar()">
     <i class="fas fa-user" style="color:rgb(100,100,100)"></i>
   </span>
 </nav>
 
-<!-- [ngStyle]="{'background-image':'url('+backgroundImg+')'}"  -->
 <div id="wrapper" >
   <!-- Sidebar Left -->
   <aside id="sidebar" [className]="sidebarToggle ? 'page-sidebar' : 'page-sidebar collapse-sidebar'">
@@ -23,25 +24,20 @@
             <div style="float:left;width:100%;height:442px!important">
               <!-- Icons -->
               <ul id="ul-veld">
-
-                <!-- sidebarItems -->
-                <li *ngFor="let item of sidebarItems; index as i">
+                <!-- Navigatie -->
+                <li *ngFor="let item of navigatieModel.themas; index as i">
                   <a (click)="changeSidebar(item.item_color, i)" [style.background-color]="item.item_color" [style.border-color]="i==sidebarSelected ? item.item_color : 'rgb(255,255,255)'">
-                    <!-- <img src="{{ item.item_img }}" height="18" width="18"> -->
                     <i [className]="item.item_img"></i>
                   </a>
                 </li>
-
               </ul>
+
               <!-- Details -->
               <ul id="ul-thema">
-                <li class="veld">{{ sidebarItems[sidebarSelected].item_themas.item_titel }}</li>
-
-                <li class="sweep" *ngFor="let item of sidebarItems[sidebarSelected].item_themas.item_themas; index as i">
-                  <a [routerLink]="['/list', item.split(' ').join('-') | lowercase]">{{ item }}</a>
+                <li class="veld">{{ navigatieModel.themas[sidebarSelected].item_titel }}</li>
+                <li class="sweep" *ngFor="let item of getVaardigheden(); index as i">
+                  <a [routerLink]="['/list', navigatieModel.themas[sidebarSelected].id,  item.id]">{{ item.item_titel }}</a>
                 </li>
-
-
               </ul>
             </div>
         </div>
@@ -50,14 +46,14 @@
   </aside>
 
    <!-- Sidebar Right -->
-  <aside id="right-sidebar" [className]="sidebarUserToggle ? 'right-sidebar' : 'right-sidebar hide-sidebar'">
+  <aside id="right-sidebar" [className]="sidebarUserToggle ? 'right-sidebar' : 'right-sidebar hide-sidebar'" *ngIf="userLogedIn==null; else isLoggedIn">
     <div class="input-group" style="width:100%!important;z-index:1">
-      <h3>Log-in {{ testUser.firstName }}</h3>
-      <input id="email" type="text" class="form-control searchInput" placeholder="username">
-      <input id="password" type="password" class="form-control searchInput" placeholder="password">
+      <h3>Log-in</h3>
+      <input id="email" type="text" class="form-control searchInput" placeholder="username" [(ngModel)]="email">
+      <input id="password" type="password" class="form-control searchInput" placeholder="password" [(ngModel)]="password">
     </div>
     <div class="button-wrapper">
-      <div class="btn btn-selector" (click)="login()">
+      <div class="btn btn-selector" (click)="login(email, password)">
         Log in
       </div>
       <div class="btn btn-selector">
@@ -66,10 +62,21 @@
     </div>
   </aside>
 
+  <ng-template #isLoggedIn>
+    <aside id="right-sidebar" [className]="sidebarUserToggle ? 'right-sidebar' : 'right-sidebar hide-sidebar'">
+      <div class="input-group" style="width:100%!important;z-index:1">
+        <h3><b>{{ userLogedIn.firstName }}</b></h3>
+      </div>
+      <div class="button-wrapper button-wrapper-bottom">
+        <div class="btn btn-selector" (click)="logout()">
+          Log out
+        </div>
+      </div>
+    </aside>
+  </ng-template>
+
   <div [className]="sidebarToggle ? 'page-content sidebar-page' : 'page-content collapsed-sidebar'">
-
         <router-outlet></router-outlet>
-
   </div>
 
   <div [className]="sidebarToggle ? 'content' : 'content full-content'">
@@ -77,5 +84,7 @@
       © 2018 Stijn Defour
     </div>
   </div>
+
+  <cookie-law></cookie-law>
 
 </div>

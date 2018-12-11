@@ -80,7 +80,7 @@ aside {
   /* border-right: 1px solid #e3e3e3; */
   margin: 0;
   box-sizing: border-box;
-  outline: none!important;
+  outline: none !important;
 }
 
 #ul-thema, #ul-veld {
@@ -221,14 +221,6 @@ a {
   height: 100%;
 }
 
-* {
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: -moz-none;
-    -o-user-select: none;
-    user-select: none;
-}
-
 .selectable {
     -webkit-user-select: text;
     -khtml-user-select: text;
@@ -286,9 +278,12 @@ a {
 }
 
 .input-group h3 {
+  margin: 15px 0px 15px 0px;
   width: 92%;
   color: rgba(140, 140, 140);
+  word-break: break-word;
 }
+
 
 /* Content */
 .page-content.collapsed-sidebar {
@@ -296,69 +291,32 @@ a {
 }
 .page-content {
     transition: all .2s;
-}
-.page-content {
     min-height: 100%;
     padding-top: 50px;
 }
 .page-content.sidebar-page {
     margin-left: 280px;
 }
-/* list-component test */
-/* .page-content-wrapper {
-    float: left;
-    width: 100%;
-    height: auto;
-    position: relative;
-}
-.page-content-inner-veld {
-    position: relative;
-    padding: 40px;
-    margin-bottom: 51px;
-    clear: both;
-    min-height: 450px;
-}
-.veld-home-title {
-    background-color: hsla(0,0%,100%,.56);
-    padding: 15px 30px 22px;
-    font-size: 120%;
-}
-.row {
-    margin-left: -15px;
-    margin-right: -15px;
-}
-.veld-home-title h1 {
-    font-weight: 300;
-    word-break: break-word;
-}
-.veld-home-title p {
-    font-weight: 500;
-    text-shadow: 1px 1px #fff;
-}
-
-@media only screen and (max-width: 600px) {
-  .veld-home-title h1 {
-      font-size: 1.5rem;
-  }
-  .veld-home-title p {
-      font-size: 1rem;
-  }
-} */
 
 .button-wrapper {
     text-align: center;
     width: 100%!important;
 }
-.button-wrapper button {
+.button-wrapper btn {
     text-align: center;
     width: 160px!important;
 }
+.button-wrapper-bottom {
+  position: absolute;
+  bottom: 0;
+}
+
 .btn-selector, .btn-selector:hover {
     background-color: rgb(233, 37, 45);
     color: rgb(255,255,255);
 }
 .btn-selector {
-    background-color: #f6f6f6;
+    background-color: #f5f5f5;
     font-size: 12px;
     padding: 8px 10px 7px;
     font-weight: 400;

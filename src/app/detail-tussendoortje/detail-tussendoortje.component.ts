@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import {CookieService} from 'angular2-cookie/core';
 
-import { EditorModule } from '@tinymce/tinymce-angular';
+declare var tinymce: any;
 
 @Component({
   selector: 'app-detail-tussendoortje',
@@ -9,14 +10,18 @@ import { EditorModule } from '@tinymce/tinymce-angular';
   styleUrls: ['./detail-tussendoortje.component.css']
 })
 
-export class DetailTussendoortjeComponent implements OnInit {
+export class DetailTussendoortjeComponent implements OnInit, OnDestroy {
+
+  constructor(private route: ActivatedRoute, private _cookieService: CookieService) { }
   vaardigheid: string;
   doel: string;
   private sub: any;
+  imageUrls: string[] = [];
+  leerdoelen: string[] = [''];
 
-  constructor(private route: ActivatedRoute) { }
+  @ViewChild('myFotos') myFotos: ElementRef;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
       this.vaardigheid = params['vaardigheid'];
       this.doel = params['doel'];
@@ -28,6 +33,36 @@ export class DetailTussendoortjeComponent implements OnInit {
   }
 
   getTinyMceContent() {
-    console.log(tinymce.get("editor").getContent());
+      console.log(tinymce.get('editor').getContent());
+  }
+
+  getDoelen(): any {
+      const doelCookie = this._cookieService.get('doelenGeselecteerd');
+      return doelCookie.split(',');
+  }
+
+  onSelectFile(event) { // called each time file input changes
+    if (event.target.files && event.target.files[0]) {
+      const files = event.target.files;
+      if (files) {
+        for (const file of files) {
+          const reader = new FileReader();
+          reader.onload = (e: any) => {
+            this.imageUrls.push(e.target.result);
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+    }
+    this.reset();
+  }
+
+  reset(): void {
+    this.myFotos.nativeElement.value = '';
+  }
+
+  deleteImage(index: number) {
+    this.reset();
+    this.imageUrls.splice(index, 1);
   }
 }
